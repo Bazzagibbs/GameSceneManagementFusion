@@ -2,14 +2,11 @@
 //  
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using Fusion;
 using UnityEngine.ResourceManagement.ResourceProviders;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace BazzaGibbs.GameSceneManagement {
     public class GameSceneManagerFusion : Fusion.Behaviour, INetworkSceneManager {
@@ -156,11 +153,9 @@ namespace BazzaGibbs.GameSceneManagement {
         }
 
         public bool TryGetLevelRef(GameLevel levelAsset, out SceneRef levelRef) {
-            for(int i = 0; i < registeredLevels.Length; i++) {
-                if (registeredLevels[i] == levelAsset) {
-                    levelRef = i + gameLevelSceneOffset;
-                    return true;
-                }
+            if (levelAsset.registeredSceneRefIndex >= 0) {
+                levelRef = levelAsset.registeredSceneRefIndex;
+                return true;
             }
             
             levelRef = SceneRef.None;
