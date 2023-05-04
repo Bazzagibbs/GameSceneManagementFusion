@@ -132,13 +132,16 @@ namespace BazzaGibbs.GameSceneManagement {
         private async Task<LoadedSceneCollection> SetLevelGSMIntegration(SceneRef levelRef, FinishedLoadingDelegate finished) {
             if (TryGetLevelAsset(levelRef, out GameLevel gameLevel)) {
                 LoadedSceneCollection loadedLevel = await GameSceneManager.SetLevelAsync(gameLevel);
+                List<NetworkObject> networkObjects = FindNetworkObjects(loadedLevel, true, true);
                 
+                finished(networkObjects);
+                return loadedLevel;
             }
             else {
                 Debug.LogError($"Could not load SceneRef {levelRef}");
+                return null;
             }
             
-            return null;
         }
 
         public bool TryGetLevelAsset(SceneRef levelRef, out GameLevel levelAsset) {
