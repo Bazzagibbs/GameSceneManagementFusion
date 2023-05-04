@@ -153,9 +153,12 @@ namespace BazzaGibbs.GameSceneManagement {
         }
 
         public bool TryGetLevelRef(GameLevel levelAsset, out SceneRef levelRef) {
-            if (levelAsset.registeredSceneRefIndex >= 0) {
-                levelRef = levelAsset.registeredSceneRefIndex + gameLevelSceneOffset;
-                return true;
+            for (int i = 0; i < registeredLevels.Length; i++) {
+                GameLevel registeredLevel = registeredLevels[i];
+                if (registeredLevel.EqualSceneCollection(levelAsset)) {
+                    levelRef = i + gameLevelSceneOffset;
+                    return true;
+                }
             }
             
             levelRef = SceneRef.None;
