@@ -154,7 +154,7 @@ namespace BazzaGibbs.GameSceneManagement {
 
         public bool TryGetLevelRef(GameLevel levelAsset, out SceneRef levelRef) {
             if (levelAsset.registeredSceneRefIndex >= 0) {
-                levelRef = levelAsset.registeredSceneRefIndex;
+                levelRef = levelAsset.registeredSceneRefIndex + gameLevelSceneOffset;
                 return true;
             }
             
