@@ -11,7 +11,7 @@
   "type": "library",
   "hideInEditor": false,
   "dependencies": {
-    "com.bazzagibbs.gamescenemanagement": "0.1.2"
+    "com.bazzagibbs.gamescenemanagement": "0.1.5"
   },
   "keywords": [
     "Game Architecture",
