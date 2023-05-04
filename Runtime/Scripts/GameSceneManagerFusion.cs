@@ -17,7 +17,8 @@ namespace BazzaGibbs.GameSceneManagement {
         public NetworkRunner Runner { get; private set; }
         
         public int gameLevelSceneOffset = 1000;
-        [FormerlySerializedAs("gamelevelAssets")] public GameLevel[] gameLevels;
+        public static GameLevel[] registeredLevels => GameSceneManager.Instance.registeredLevels;
+        public static GameLevel offlineLevel => GameSceneManager.offlineLevel;
 
         private SceneRef m_CurrentLevelRef;
         private bool m_CurrentLevelOutdated = false;
@@ -35,7 +36,7 @@ namespace BazzaGibbs.GameSceneManagement {
             if (!m_CurrentLevelOutdated || m_LoadingInProgress) {
                 return;
             }
-
+            
             if (s_CurrentlyLoading.TryGetTarget(out GameSceneManagerFusion target)) {
                 Assert.Check(target != this);
                 if (!target) {
@@ -120,7 +121,7 @@ namespace BazzaGibbs.GameSceneManagement {
             Assert.Check(Runner == runner);
 
             Runner = null;
-            if (TryGetLevelRef(GameSceneManager.Instance.offlineLevel, out SceneRef levelRef)) {
+            if (TryGetLevelRef(offlineLevel, out SceneRef levelRef)) {
                 m_CurrentLevelRef = levelRef;
             } 
             m_CurrentLevelOutdated = false;
@@ -140,20 +141,20 @@ namespace BazzaGibbs.GameSceneManagement {
             return null;
         }
 
-        private bool TryGetLevelAsset(SceneRef levelRef, out GameLevel levelAsset) {
+        public bool TryGetLevelAsset(SceneRef levelRef, out GameLevel levelAsset) {
             int index = levelRef;
-            if (index < gameLevelSceneOffset || index >= gameLevelSceneOffset + gameLevels.Length) {
+            if (index < gameLevelSceneOffset || index >= gameLevelSceneOffset + registeredLevels.Length) {
                 levelAsset = null;
                 return false;
             }
 
-            levelAsset = gameLevels[index - gameLevelSceneOffset];
+            levelAsset = registeredLevels[index - gameLevelSceneOffset];
             return true;
         }
 
-        private bool TryGetLevelRef(GameLevel levelAsset, out SceneRef levelRef) {
-            for(int i = 0; i < gameLevels.Length; i++) {
-                if (gameLevels[i] == levelAsset) {
+        public bool TryGetLevelRef(GameLevel levelAsset, out SceneRef levelRef) {
+            for(int i = 0; i < registeredLevels.Length; i++) {
+                if (registeredLevels[i] == levelAsset) {
                     levelRef = i + gameLevelSceneOffset;
                     return true;
                 }
