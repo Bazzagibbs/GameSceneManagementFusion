@@ -1,0 +1,17 @@
+{
+    "name": "BazzaGibbs.GameSceneManagement.Fusion",
+    "rootNamespace": "BazzaGibbs.GameSceneManagement",
+    "references": [
+        "GUID:c57c2857c940e4e45ac7b11f5e0db711",
+        "GUID:84651a3751eca9349aac36a66bba901b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

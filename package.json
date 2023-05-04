@@ -1,0 +1,20 @@
+{
+  "name": "com.bazzagibbs.gamescenemanagementfusion",
+  "version": "0.0.1",
+  "description": "Extension for integrating the Game Scene Management package into Photon Fusion's networked scene manager.",
+  "displayName": "Game Scene Management - Photon Fusion Integration",
+  "author": {
+    "name": "BazzaGibbs",
+    "email": "bazzagibbsdev@gmail.com",
+    "url": "https://bazzagibbs.com"
+  },
+  "type": "library",
+  "hideInEditor": false,
+  "dependencies": {
+    "com.bazzagibbs.gamescenemanagement": "0.1.1"
+  },
+  "keywords": [
+    "Game Architecture",
+    "Photon Fusion Integration"
+  ]
+}
